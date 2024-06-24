@@ -1,4 +1,4 @@
-package java8;
+package com.ns.java8;
 
 import java.util.Map;
 import java.util.function.Function;
