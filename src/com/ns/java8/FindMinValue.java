@@ -10,8 +10,9 @@ public class FindMinValue {
 		
 		List<Integer> list = Arrays.asList(1,4,3,6,7,8,9,10);
 		
-		//int i =list.stream().min(Integer::compare).get();
-		int i = list.stream().max(Comparator.naturalOrder()).get();
+		int i =list.stream().min(Integer::compare).get();
+		int i1 = list.stream().min(Comparator.naturalOrder()).get();
 		System.out.println(i);
+		System.out.println(i1);
 	}
 }

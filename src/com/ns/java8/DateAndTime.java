@@ -8,7 +8,7 @@ public class DateAndTime {
 
 	public static void main(String[] args) {
 		
-	String date = "1996-07-18";
+	String date = "1986-04-16";
 	
 	DateTimeFormatter  dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	

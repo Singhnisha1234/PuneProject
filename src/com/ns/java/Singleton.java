@@ -3,7 +3,7 @@ public class Singleton{
 
 private static Singleton instance = null;
 
-Singleton(){
+private Singleton(){
 }
 
 public static Singleton getInstance(){
