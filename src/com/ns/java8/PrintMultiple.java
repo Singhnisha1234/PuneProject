@@ -12,5 +12,6 @@ public class PrintMultiple {
 	
 	Stream<Integer> i =list.stream().filter(n -> n % 5== 0);
 	
+	System.out.println(i);
 	}
 }

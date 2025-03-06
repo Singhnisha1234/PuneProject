@@ -29,27 +29,41 @@ public class EmployeeDemo {
 		employeeList.add(new Employee(255, "Ali Baig", 23, "Male", "Infrastructure", 2018, 12700.0));
 		employeeList.add(new Employee(266, "Sanvi Pandey", 26, "Female", "Product Development", 2015, 28900.0));
 		employeeList.add(new Employee(277, "Anuj Chettiar", 31, "Male", "Product Development", 2012, 35700.0));
+
 		
 	
 		// How many male and female employees are there in the organization? 
-		Map<String,Long> findMaleAndFemale = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender , Collectors.counting()));
-		System.out.println(findMaleAndFemale);
 
+		Map<String,Long> hashMap = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender,Collectors.counting()));
+		System.out.println(hashMap);
 		
 		//Print the name of all departments in the organization?
 		//Use distinct() method after calling map(Employee::getDepartment) on the stream. It will return unique departments.
+
+		List<String> list = employeeList.stream().map(Employee::getDepartment).distinct().collect(Collectors.toList());
+		System.out.println(list);
 		
 		employeeList.stream().map(Employee::getDepartment).distinct().forEach(System.out::println);
-		
 		
 		//What is the average age of male and female employees?
 		//Use same method as query 3.1 but pass Collectors.averagingInt(Employee::getAge) as the second argument to Collectors.groupingBy().
 		
-		Map<String,Double> avgAgeOfMaleAndFemaleEmployees = employeeList.stream()
-				.collect(Collectors.groupingBy(Employee::getGender , Collectors.averagingInt(Employee::getAge)));
+		Map<String,Double> avgAgeOfMaleAndFemaleEmployees = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender,Collectors.averagingInt(Employee::getAge)));
 		System.out.println(avgAgeOfMaleAndFemaleEmployees);
+		
 		
 		// Get the details of highest paid employee in the organization?
 		//Use Collectors.maxBy() method which returns maximum element wrapped in an Optional object based on supplied Comparator.
-		employeeList.stream().collect(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary)));
+		
+		Employee list1 =  employeeList.stream().collect(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))).get();
+		System.out.println(list1.getName() + " : " + list1.getId() + " : " + list1.getGender() + " : " + list1.getDepartment() + " : " + list1.getAge() + " : " + list1.getYearOfJoining());
+		
+		//Get the names of all employees who have joined after 2015
+		List<String> map = employeeList.stream().filter(n -> n.getYearOfJoining() > 2015).map(Employee::getName).collect(Collectors.toList());
+		System.out.println(map);
+		
+		
+		Double findSecondHighest =employeeList.stream().map(Employee::getSalary).distinct().sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
+		System.out.println(findSecondHighest);
 }}
+
